@@ -1,15 +1,20 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
-import { AllExceptionsFilter } from './filters/http-exception.filter';
-import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api/v1/');
+  const app = await NestFactory.createMicroservice(AppModule, {
+    transport: Transport.RMQ,
+    options: {
+      urls: [
+        `amqp://${process.env.RMQ_USER}:${process.env.RMQ_PASSWORD}@${process.env.RMQ_URL}`,
+      ],
+      queue: 'products',
+      noAck: false,
+    },
+  });
   app.useGlobalPipes(new ValidationPipe());
-  app.useGlobalFilters(new AllExceptionsFilter());
-  app.useGlobalInterceptors(new TimeoutInterceptor());
-  await app.listen(3000);
+  await app.listen();
 }
 bootstrap();
