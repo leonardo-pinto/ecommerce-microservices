@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from '../../src/products/products.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { productsMock } from './mocks/products.mock';
-import { updateProductDtoMock } from './mocks/update-product-dto.mock';
+import { productsMock } from '../mocks/products.mock';
+import { updateProductDtoMock } from '../mocks/update-product-dto.mock';
 
 describe('ProductsService', () => {
   let service: ProductsService;
