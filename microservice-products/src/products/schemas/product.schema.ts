@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 
 @Schema({ timestamps: true, collection: 'products' })
 export class Product extends mongoose.Document {
-  @Prop()
+  @Prop({ unique: true })
   name: string;
 
   @Prop()
