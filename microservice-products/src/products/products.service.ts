@@ -1,9 +1,10 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateProductDto } from './dtos/create-product.dto';
-import { UpdateProductDto } from './dtos/update-product.dto';
+import { UpdateProduct } from './dtos/update-product.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Product } from './schemas/product.schema';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class ProductsService {
@@ -24,7 +25,7 @@ export class ProductsService {
   }
 
   async updateProduct(
-    updateProductDto: UpdateProductDto,
+    updateProductDto: UpdateProduct,
     id: string,
   ): Promise<void> {
     const updatedProduct = await this.productModel.findOneAndUpdate(
@@ -33,7 +34,7 @@ export class ProductsService {
     );
 
     if (!updatedProduct) {
-      throw new BadRequestException('Invalid product id');
+      throw new RpcException('Invalid product id');
     }
   }
 }
