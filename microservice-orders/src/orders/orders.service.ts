@@ -7,13 +7,13 @@ import { ClientProxyRMQ } from 'src/proxyrmq/client-proxy-rmq';
 import { CreateOrderDto } from './dtos/create-order.dto';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 import { OrderStatusEnum } from './enums/order-status.enum';
-import { Order } from './interfaces/order.interface';
+import { Order, OrderDocument } from './schemas/order.schema';
 
 @Injectable()
 export class OrdersService {
   constructor(
     @InjectModel('Order')
-    private readonly orderModel: Model<Order>,
+    private readonly orderModel: Model<OrderDocument>,
     private clientProxyRMQ: ClientProxyRMQ,
   ) {}
 
@@ -35,8 +35,8 @@ export class OrdersService {
     const order = new this.orderModel(createOrderDto);
     order.date = new Date();
     order.status = OrderStatusEnum.AWAITING_PAYMENT;
-    order.totalValue = order.productsData.reduce((acc, { value, quantity }) => {
-      return acc + value * quantity;
+    order.totalPrice = order.productsData.reduce((acc, { price, quantity }) => {
+      return acc + price * quantity;
     }, 0);
 
     await order.save();

@@ -1,24 +1,26 @@
-import * as mongoose from 'mongoose';
+import { Document } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { User } from './user.schema';
+import { ProductsData } from './products-data.schema';
 
-export const OrderSchema = new mongoose.Schema(
-  {
-    productsData: [
-      {
-        id: String,
-        quantity: Number,
-        value: Number,
-        _id: false,
-      },
-    ],
-    user: {
-      userId: String,
-      email: String,
-      name: String,
-      _id: false,
-    },
-    date: { type: Date, required: true, default: Date.now },
-    totalValue: { type: Number, required: true },
-    status: { type: String, required: true },
-  },
-  { timestamps: true, collection: 'orders', versionKey: false },
-);
+export type OrderDocument = Order & Document;
+
+@Schema({ timestamps: true, versionKey: false })
+export class Order {
+  @Prop()
+  productsData: ProductsData[];
+
+  @Prop()
+  user: User;
+
+  @Prop({ required: true, default: Date.now })
+  date: Date;
+
+  @Prop({ required: true })
+  totalPrice: number;
+
+  @Prop({ required: true })
+  status: string;
+}
+
+export const OrderSchema = SchemaFactory.createForClass(Order);
