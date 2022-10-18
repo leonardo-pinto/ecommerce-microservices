@@ -4,12 +4,12 @@ export class Order {
   productsData: ProductData[];
   user: Express.User;
   date: Date;
-  totalValue: number;
+  totalPrice: number;
   status: OrderStatusEnum;
 }
 
 class ProductData {
   id: string;
   quantity: number;
-  value: number;
+  price: number;
 }
