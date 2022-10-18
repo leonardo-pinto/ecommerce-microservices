@@ -5,15 +5,15 @@ import { lastValueFrom } from 'rxjs';
 import { ClientProxyRMQ } from 'src/proxyrmq/client-proxy-rmq';
 import { ProcessPaymentDto } from './dtos/process-payment.dto';
 import { PaymentStatusEnum } from './enums/payment-status.enum';
-import { Payment } from './interfaces/payment.interface';
 import { MailerService } from '@nestjs-modules/mailer';
 import HTML_PAYMENT_NOTIFICATION from './static/html-payment-notification';
+import { Payment, PaymentDocument } from './schemas/payment.schema';
 
 @Injectable()
 export class PaymentsService {
   constructor(
     @InjectModel('Payment')
-    private readonly paymentModel: Model<Payment>,
+    private readonly paymentModel: Model<PaymentDocument>,
     private clientProxyRMQ: ClientProxyRMQ,
     private readonly mailerService: MailerService,
   ) {}

@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ProxyRMQModule } from 'src/proxyrmq/proxy-rmq.module';
 import { PaymentsController } from './payments.controller';
 import { PaymentsService } from './payments.service';
-import { PaymentSchema } from './schemas/payment.schema';
+import { Payment, PaymentSchema } from './schemas/payment.schema';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from '@nestjs/config';
 
@@ -22,7 +22,7 @@ import { ConfigModule } from '@nestjs/config';
         },
       },
     }),
-    MongooseModule.forFeature([{ name: 'Payment', schema: PaymentSchema }]),
+    MongooseModule.forFeature([{ name: Payment.name, schema: PaymentSchema }]),
     ProxyRMQModule,
   ],
   controllers: [PaymentsController],

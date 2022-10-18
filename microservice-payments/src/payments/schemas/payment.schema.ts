@@ -1,28 +1,25 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { ShippingData } from './shipping-data.schema';
+import { User } from './user.schema';
 
-export const PaymentSchema = new mongoose.Schema(
-  {
-    orderId: {
-      type: String,
-      required: true,
-      _id: false,
-    },
-    shippingData: {
-      name: String,
-      address: String,
-      number: Number,
-      city: String,
-      zipCode: Number,
-      _id: false,
-    },
-    user: {
-      userId: String,
-      email: String,
-      name: String,
-      _id: false,
-    },
-    status: { type: String, required: true },
-    date: { type: Date, required: true, default: Date.now },
-  },
-  { timestamps: true, collection: 'payments', versionKey: false },
-);
+export type PaymentDocument = Payment & Document;
+
+@Schema({ timestamps: true, versionKey: false })
+export class Payment {
+  @Prop({ required: true })
+  orderId: string;
+
+  @Prop({ required: true })
+  shippingData: ShippingData;
+
+  @Prop({ required: true })
+  user: User;
+
+  @Prop({ required: true })
+  status: string;
+
+  @Prop({ required: true, default: Date.now })
+  date: Date;
+}
+
+export const PaymentSchema = SchemaFactory.createForClass(Payment);
