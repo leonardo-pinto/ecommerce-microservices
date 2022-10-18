@@ -3,17 +3,17 @@ import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
-      name: string;
+  name: string;
 
   @IsNumber()
   @IsNotEmpty()
-      price: number;
+  price: number;
 
   @IsNumber()
   @IsNotEmpty()
-      quantity: number;
+  quantity: number;
 
   @IsString()
   @IsNotEmpty()
-      description: string;
+  description: string;
 }
