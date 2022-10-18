@@ -1,19 +1,23 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
-@Schema({ timestamps: true, collection: 'products' })
-export class Product extends mongoose.Document {
-  @Prop({ unique: true })
-  name: string;
-
-  @Prop()
-  price: number;
-
-  @Prop()
-  quantity: number;
-
-  @Prop()
-  description: string;
-}
-
-export const ProductSchema = SchemaFactory.createForClass(Product);
+export const ProductSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+  },
+  { timestamps: true, collection: 'products', versionKey: false },
+);
