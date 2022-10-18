@@ -1,15 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateProductDto } from './dtos/create-product.dto';
-import { UpdateProduct } from './dtos/update-product.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Product } from './schemas/product.schema';
 import { RpcException } from '@nestjs/microservices';
+import { Product } from './interfaces/product.interface';
 
 @Injectable()
 export class ProductsService {
-  private readonly logger = new Logger(ProductsService.name);
-
   constructor(
     @InjectModel('Product')
     private readonly productModel: Model<Product>,
@@ -24,13 +21,14 @@ export class ProductsService {
     return await this.productModel.find();
   }
 
-  async updateProduct(
-    updateProductDto: UpdateProduct,
-    id: string,
-  ): Promise<void> {
+  async getProductById(id: string): Promise<Product> {
+    return await this.productModel.findOne({ _id: id }).exec();
+  }
+
+  async updateProduct(quantity: number, id: string): Promise<void> {
     const updatedProduct = await this.productModel.findOneAndUpdate(
       { _id: id },
-      { $set: updateProductDto },
+      { $inc: { quantity: -quantity } },
     );
 
     if (!updatedProduct) {
