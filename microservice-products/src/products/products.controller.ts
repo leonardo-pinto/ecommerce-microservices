@@ -10,7 +10,7 @@ import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductsService } from './products.service';
 import { AckErrors } from '../utils/ack-errors';
 import { UpdateProductDto } from './dtos/update-product.dto';
-import { Product } from './interfaces/product.interface';
+import { Product } from './schemas/product.schema';
 
 @Controller()
 export class ProductsController {
