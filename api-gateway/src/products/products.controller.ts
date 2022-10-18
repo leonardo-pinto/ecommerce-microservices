@@ -1,15 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateProductDto } from './dtos/create-product.dto';
-import { UpdateProductDto } from './dtos/update-product.dto';
 import { Product } from './interfaces/product.interface';
 import { ProductsService } from './products.service';
 
@@ -27,14 +18,5 @@ export class ProductsController {
   @Get()
   async getAllProducts(): Promise<Product[]> {
     return await this.productsService.getAllProducts();
-  }
-
-  @UseGuards(AuthGuard('jwt'))
-  @Put(':id')
-  async updateProduct(
-    @Body() updateProductDto: UpdateProductDto,
-    @Param('id') id: string,
-  ): Promise<void> {
-    await this.productsService.updateProduct(updateProductDto, id);
   }
 }
