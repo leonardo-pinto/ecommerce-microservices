@@ -5,6 +5,8 @@ import { ProductsModule } from './products/products.module';
 import { AwsModule } from './aws/aws.module';
 import { AuthModule } from './auth/auth.module';
 import { AwsCognitoService } from './aws/aws-cognito.service';
+import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { AwsCognitoService } from './aws/aws-cognito.service';
     ProductsModule,
     AwsModule,
     AuthModule,
+    OrdersModule,
+    PaymentsModule,
   ],
   controllers: [],
   providers: [AwsCognitoService],
