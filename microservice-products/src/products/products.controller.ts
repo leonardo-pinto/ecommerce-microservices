@@ -44,6 +44,7 @@ export class ProductsController {
 
     try {
       const result = await this.productsService.getAllProducts();
+      await channel.ack(originalMessage);
       return result;
     } finally {
       await channel.ack(originalMessage);
@@ -60,13 +61,9 @@ export class ProductsController {
 
     try {
       const result = await this.productsService.getProductById(id);
-      await channel.ack(originalMessage);
       return result;
-    } catch (error) {
-      this.logger.error(`Error: ${JSON.stringify(error)}`);
-      if (AckErrors.hasAckErrors(error.message)) {
-        await channel.ack(originalMessage);
-      }
+    } finally {
+      await channel.ack(originalMessage);
     }
   }
 

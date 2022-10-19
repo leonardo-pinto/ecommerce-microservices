@@ -22,7 +22,11 @@ export class ProductsService {
   }
 
   async getProductById(id: string): Promise<Product> {
-    return await this.productModel.findOne({ _id: id }).exec();
+    const product = await this.productModel.findOne({ _id: id }).exec();
+    if (!product) {
+      throw new RpcException('Product not found');
+    }
+    return product;
   }
 
   async updateProduct(quantity: number, id: string): Promise<void> {
