@@ -33,9 +33,7 @@ export class OrderProductsData {
   @IsNumber()
   quantity: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  price: number;
+  price?: number;
 }
 
 export class CreateOrderDto {
