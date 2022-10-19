@@ -24,8 +24,4 @@ export class OrderProductsData {
   @IsNotEmpty()
   @IsNumber()
   quantity: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  price: number;
 }
