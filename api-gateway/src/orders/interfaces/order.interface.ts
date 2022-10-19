@@ -1,15 +1,31 @@
+import { ExpressAdapter } from '@nestjs/platform-express';
+import { ApiProperty } from '@nestjs/swagger';
 import { OrderStatusEnum } from '../enums/order-status.enum';
 
-export class Order {
-  productsData: ProductData[];
-  user: Express.User;
-  date: Date;
-  totalPrice: number;
-  status: OrderStatusEnum;
+class ProductData {
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  quantity: number;
+
+  @ApiProperty()
+  price: number;
 }
 
-class ProductData {
-  id: string;
-  quantity: number;
-  price: number;
+export class Order {
+  @ApiProperty({ type: [ProductData] })
+  productsData: ProductData[];
+
+  @ApiProperty()
+  user: Express.User;
+
+  @ApiProperty()
+  date: Date;
+
+  @ApiProperty()
+  totalPrice: number;
+
+  @ApiProperty()
+  status: OrderStatusEnum;
 }
