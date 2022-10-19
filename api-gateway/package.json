@@ -27,6 +27,7 @@
     "@nestjs/microservices": "^9.1.4",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.1.2",
     "amazon-cognito-identity-js": "^5.2.11",
     "amqp-connection-manager": "^4.1.7",
     "amqplib": "^0.10.3",
