@@ -42,13 +42,9 @@ export class OrdersController {
     const originalMessage = context.getMessage();
     try {
       const order = await this.ordersService.getOrderById(id);
-      await channel.ack(originalMessage);
       return order;
-    } catch (error) {
-      this.logger.error(`Error: ${JSON.stringify(error)}`);
-      if (AckErrors.hasAckErrors(error.message)) {
-        await channel.ack(originalMessage);
-      }
+    } finally {
+      await channel.ack(originalMessage);
     }
   }
 
