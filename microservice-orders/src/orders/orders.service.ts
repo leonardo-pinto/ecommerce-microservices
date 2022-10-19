@@ -8,6 +8,7 @@ import { CreateOrderDto } from './dtos/create-order.dto';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 import { OrderStatusEnum } from './enums/order-status.enum';
 import { Order, OrderDocument } from './schemas/order.schema';
+import { ProductsData } from './schemas/products-data.schema';
 
 @Injectable()
 export class OrdersService {
@@ -26,10 +27,9 @@ export class OrdersService {
         'get-product-by-id',
         productData.id,
       );
-      const currProduct = await lastValueFrom(response);
-      if (!currProduct) {
-        throw new BadRequestException('Product not found');
-      }
+      const currProduct: ProductsData = await lastValueFrom(response);
+      const currIndex = createOrderDto.productsData.indexOf(productData);
+      createOrderDto.productsData[currIndex].price = currProduct.price;
     }
 
     const order = new this.orderModel(createOrderDto);
