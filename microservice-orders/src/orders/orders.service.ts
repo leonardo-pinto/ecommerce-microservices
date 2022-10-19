@@ -52,7 +52,7 @@ export class OrdersService {
   async getOrderById(id: string): Promise<Order> {
     const order = await this.orderModel.findById({ _id: id });
     if (!order) {
-      throw new BadRequestException('Order not found');
+      throw new RpcException('Order not found');
     }
     return order;
   }
