@@ -1,9 +1,11 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AwsCognitoService } from 'src/aws/aws-cognito.service';
 import { AuthLoginDto } from './dtos/auth-login.dto';
 import { AuthSignupDto } from './dtos/auth-signup.dto';
 
 @Controller('auth')
+@ApiTags('auth')
 export class AuthController {
   constructor(private awsCognitoService: AwsCognitoService) {}
 

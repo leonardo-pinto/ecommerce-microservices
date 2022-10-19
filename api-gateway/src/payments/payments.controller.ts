@@ -3,8 +3,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { ProcessPaymentDto } from './dtos/process-payment.dto';
 import { PaymentsService } from './payments.service';
 import { Request } from 'express';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('payments')
+@ApiTags('payments')
+@ApiBearerAuth()
 export class PaymentsController {
   constructor(private paymentsService: PaymentsService) {}
 

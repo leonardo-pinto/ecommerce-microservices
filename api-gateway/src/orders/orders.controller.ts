@@ -13,8 +13,12 @@ import { CreateOrderDto } from './dtos/create-order.dto';
 import { OrdersService } from './orders.service';
 import { Request } from 'express';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
+import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { Order } from './interfaces/order.interface';
 
 @Controller('orders')
+@ApiTags('orders')
+@ApiBearerAuth()
 export class OrdersController {
   constructor(private ordersService: OrdersService) {}
 
@@ -30,7 +34,10 @@ export class OrdersController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
-  async getOrderById(@Param('id') id: string) {
+  @ApiCreatedResponse({
+    type: Order,
+  })
+  async getOrderById(@Param('id') id: string): Promise<Order> {
     return await this.ordersService.getOrderById(id);
   }
 
