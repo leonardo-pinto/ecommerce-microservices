@@ -3,7 +3,7 @@ import { OrdersService } from './orders.service';
 import { OrdersController } from './orders.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderSchema } from './schemas/order.schema';
-import { ProxyRMQModule } from 'src/proxyrmq/proxy-rmq.module';
+import { ProxyRMQModule } from '../proxyrmq/proxy-rmq.module';
 
 @Module({
   imports: [

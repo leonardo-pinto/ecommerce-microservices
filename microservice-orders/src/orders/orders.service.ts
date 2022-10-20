@@ -1,9 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { lastValueFrom } from 'rxjs';
-import { ClientProxyRMQ } from 'src/proxyrmq/client-proxy-rmq';
+import { ClientProxyRMQ } from '../proxyrmq/client-proxy-rmq';
 import { CreateOrderDto } from './dtos/create-order.dto';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 import { OrderStatusEnum } from './enums/order-status.enum';

@@ -6,7 +6,7 @@ import {
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
-import { AckErrors } from 'src/utils/ack-errors';
+import { AckErrors } from '../utils/ack-errors';
 import { CreateOrderDto } from './dtos/create-order.dto';
 import { UpdateOrderStatusDto } from './dtos/update-order-status.dto';
 import { OrdersService } from './orders.service';
