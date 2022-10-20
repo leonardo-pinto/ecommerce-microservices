@@ -41,14 +41,24 @@ Starting from root, the project has four main directories (i.e. api-gateway, mic
 
 ### Running microservices locally
 # enter in the microservice directory
-$ e.g., cd api-gateway
+
+```sh
+  cd api-gateway
+```
 
 # install the dependencies
-$ npm install
+
+```sh
+  npm install
+```
 
 # run the app
-$ npm start
+```sh
+  npm start
+```
 
 # run tests
-$ npm test
+```sh
+  npm test
+```
 
