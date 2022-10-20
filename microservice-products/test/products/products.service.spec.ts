@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from '../../src/products/products.service';
 import { getModelToken } from '@nestjs/mongoose';
 import { productsMock } from '../mocks/products.mock';
-import { updateProductDtoMock } from '../mocks/update-product-dto.mock';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -11,6 +10,7 @@ describe('ProductsService', () => {
     constructor(private _data: any) {}
     static save = jest.fn().mockImplementation();
     static find = jest.fn(() => productsMock());
+    static findOne = jest.fn(() => productsMock()[0]);
     static findOneAndUpdate = jest.fn(() => productsMock()[0]);
   }
 
@@ -42,21 +42,36 @@ describe('ProductsService', () => {
     });
   });
 
+  describe('getProductById()', () => {
+    test('Should return product', async () => {
+      const findOneSpy = jest.spyOn(productModelMock, 'findOne');
+      const result = await service.getProductById('valid_id');
+      expect(findOneSpy).toHaveBeenCalledTimes(1);
+      expect(findOneSpy).toHaveBeenCalledWith({ _id: 'valid_id' });
+      expect(result).toEqual(productsMock()[0]);
+    });
+
+    test('Should throw if product is not found', async () => {
+      jest
+        .spyOn(productModelMock, 'findOne')
+        .mockImplementationOnce(() => null);
+      const promise = service.getProductById('invalid_id');
+      await expect(promise).rejects.toThrow();
+    });
+  });
+
   describe('updateProduct()', () => {
     test('Should call findOneAndUpdate with correct parameters', async () => {
       const findOneAndUpdateSpy = jest.spyOn(
         productModelMock,
         'findOneAndUpdate',
       );
-      await service.updateProduct(updateProductDtoMock(), 'valid_id');
+      await service.updateProduct(10, 'valid_id');
       expect(findOneAndUpdateSpy).toHaveBeenCalledTimes(1);
       expect(findOneAndUpdateSpy).toHaveBeenCalledWith(
         { _id: 'valid_id' },
         {
-          $set: {
-            price: 100,
-            quantity: 500,
-          },
+          $inc: { quantity: -10 },
         },
       );
     });
@@ -65,7 +80,7 @@ describe('ProductsService', () => {
       jest
         .spyOn(productModelMock, 'findOneAndUpdate')
         .mockImplementationOnce(() => null);
-      const promise = service.updateProduct(updateProductDtoMock(), 'valid_id');
+      const promise = service.updateProduct(10, 'invalid_id');
       await expect(promise).rejects.toThrow();
     });
   });

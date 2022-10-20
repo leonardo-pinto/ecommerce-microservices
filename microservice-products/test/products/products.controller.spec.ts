@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from '../../src/products/products.service';
 import { ProductsController } from '../../src/products/products.controller';
 import { getModelToken } from '@nestjs/mongoose';
-import { createProductDtoMock } from 'test/mocks/create-product-dto.mock';
 
 describe('ProductsController', () => {
   let controller: ProductsController;
