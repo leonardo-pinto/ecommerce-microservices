@@ -4,6 +4,16 @@
 
 💡 The aim of this application is to practice the development of microservices by using different technologies. Therefore,  this application is not business oriented.
 
+## Technologies - Libraries
+
+- **[`NestJS`](https://nestjs.com/)**
+- **[`Mongoose`](https://mongoosejs.com/)**
+- **[`RabbitMQ`](https://www.rabbitmq.com/)**
+- **[`Amazon Cognito`](https://aws.amazon.com/cognito/)**
+- **[`Amazon Simple Email Service`](https://aws.amazon.com/ses/)**
+- **[`PassportJS`](http://www.passportjs.org)**
+- **[`Swagger`](https://swagger.io/)**
+
 ## Service Boundary
 
 `ECommerce Microservices` is a simple online ecommerce api sample that has the basic business scenario for online purchasing with some dedicated services. There four possible `Service` or `Bounded context` for above business:
