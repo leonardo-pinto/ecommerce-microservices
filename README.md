@@ -53,11 +53,9 @@ Starting from root, the project has four main directories (i.e. api-gateway, mic
   cd api-gateway
 
 # install the dependencies
-
   npm install
 
 # run the app
-```sh
   npm start
 
 # run tests
