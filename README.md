@@ -34,31 +34,33 @@ The bellow architecture shows that there is one public REST API (API Gateway) wh
 
 ![](./assets/diagram.jpeg)
 
+## Prerequisites
+
+
+Before getting started, you need to have NodeJS installed
+
+  ```sh
+  npm install npm@latest -g
+  ```
 
 ## How to Run
 
-Starting from root, the project has four main directories (i.e. api-gateway, microservice-products, microservice-orders and microservice-payments). Each of them contains an .env.example file, which must be filled to run the services correctly. Since RabbitMQ and AWS were used, to run this app locally you should create mannualy all features which will be consumed in this app. 
+Starting from root, the project has four main directories (i.e. api-gateway, microservice-products, microservice-orders and microservice-payments). Each of them contains an .env.example file, which must be filled to run the services correctly. Since MongoDB, RabbitMQ and AWS were used, to run this app locally you should create mannualy all features which will be consumed in this app. 
 
-### Running microservices locally
-# enter in the microservice directory
 
 ```sh
+# enter in the microservice directory
   cd api-gateway
-```
 
 # install the dependencies
 
-```sh
   npm install
-```
 
 # run the app
 ```sh
   npm start
-```
 
 # run tests
-```sh
   npm test
 ```
 
