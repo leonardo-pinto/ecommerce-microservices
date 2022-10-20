@@ -44,7 +44,6 @@ export class ProductsController {
 
     try {
       const result = await this.productsService.getAllProducts();
-      await channel.ack(originalMessage);
       return result;
     } finally {
       await channel.ack(originalMessage);
