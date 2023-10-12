@@ -26,8 +26,6 @@
 
 - `Payments Service`: The payment service is responsible for payment process of orders. It is was responsible of updating order status after the payment is processed, and uses `Amazon Simple Email Service` to notify the user regarding payment status.
 
-- `Payment Service`: The payment service is responsible for payment process of our customer with different payment process and managing and tracking our payment history
-
 ## Application Architecture
 
 The bellow architecture shows that there is one public REST API (API Gateway) which is accessible for the clients. The API gateway uses a RabbitMQ message broker to communicate with each microservices. Microservices are event based which means they can publish and/or subscribe to any events occurring in the setup. By using this approach for communicating between services, each microservice does not need to know about the other services or handle errors occurred in other microservices. In addition, each microservice has its own MongoDB connection. The communication between microservices is also performed using RabbitMQ message broker.
